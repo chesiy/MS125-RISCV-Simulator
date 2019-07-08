@@ -27,9 +27,9 @@ int main() {
         cout<<' ';
     }
     cout<<'\n';
-*/  int i=1;
+*/
     while(!mem.is_end){
-        cout<<i<<' ';
+    //    cout<<i<<' ';
         fet.perform();
         fet.go_on(deco);
 
@@ -44,13 +44,9 @@ int main() {
 
         wbck.perform();
   //      reg.printreg();
-        i++;
+  //      i++;
     }
     cout<<(unsigned int)((reg.getreg(10)) & 255u)<<endl;
-
- //    dec.printinst();
-
-
 
     return 0;
 }

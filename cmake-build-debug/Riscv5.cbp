@@ -17,8 +17,8 @@
 					<DistClean command="D:/in/bin/mingw32-make.exe -f &quot;D:/Riscv5/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="Riscv5">
-				<Option output="D:/Riscv5/cmake-build-debug/Riscv5.exe" prefix_auto="0" extension_auto="0"/>
+			<Target title="code">
+				<Option output="D:/Riscv5/cmake-build-debug/code.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="D:/Riscv5/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -33,14 +33,14 @@
 					<Add directory="d:\in\bin\../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="D:/in/bin/mingw32-make.exe -f &quot;D:/Riscv5/cmake-build-debug/Makefile&quot;  VERBOSE=1 Riscv5"/>
+					<Build command="D:/in/bin/mingw32-make.exe -f &quot;D:/Riscv5/cmake-build-debug/Makefile&quot;  VERBOSE=1 code"/>
 					<CompileFile command="D:/in/bin/mingw32-make.exe -f &quot;D:/Riscv5/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="D:/in/bin/mingw32-make.exe -f &quot;D:/Riscv5/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="D:/in/bin/mingw32-make.exe -f &quot;D:/Riscv5/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="Riscv5/fast">
-				<Option output="D:/Riscv5/cmake-build-debug/Riscv5.exe" prefix_auto="0" extension_auto="0"/>
+			<Target title="code/fast">
+				<Option output="D:/Riscv5/cmake-build-debug/code.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="D:/Riscv5/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -55,7 +55,7 @@
 					<Add directory="d:\in\bin\../lib/gcc/i686-w64-mingw32/4.8.3/../../../../i686-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="D:/in/bin/mingw32-make.exe -f &quot;D:/Riscv5/cmake-build-debug/Makefile&quot;  VERBOSE=1 Riscv5/fast"/>
+					<Build command="D:/in/bin/mingw32-make.exe -f &quot;D:/Riscv5/cmake-build-debug/Makefile&quot;  VERBOSE=1 code/fast"/>
 					<CompileFile command="D:/in/bin/mingw32-make.exe -f &quot;D:/Riscv5/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="D:/in/bin/mingw32-make.exe -f &quot;D:/Riscv5/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="D:/in/bin/mingw32-make.exe -f &quot;D:/Riscv5/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -83,34 +83,34 @@
 			</Target>
 		</Build>
 		<Unit filename="D:/Riscv5/InstructionDecode.hpp">
-			<Option target="Riscv5"/>
+			<Option target="code"/>
 		</Unit>
 		<Unit filename="D:/Riscv5/InstructionFetch.hpp">
-			<Option target="Riscv5"/>
+			<Option target="code"/>
 		</Unit>
 		<Unit filename="D:/Riscv5/MemoryAccess.hpp">
-			<Option target="Riscv5"/>
+			<Option target="code"/>
 		</Unit>
 		<Unit filename="D:/Riscv5/WriteBack.hpp">
-			<Option target="Riscv5"/>
+			<Option target="code"/>
 		</Unit>
 		<Unit filename="D:/Riscv5/excution.hpp">
-			<Option target="Riscv5"/>
+			<Option target="code"/>
 		</Unit>
 		<Unit filename="D:/Riscv5/instruction.hpp">
-			<Option target="Riscv5"/>
+			<Option target="code"/>
 		</Unit>
 		<Unit filename="D:/Riscv5/main.cpp">
-			<Option target="Riscv5"/>
+			<Option target="code"/>
 		</Unit>
 		<Unit filename="D:/Riscv5/memory.hpp">
-			<Option target="Riscv5"/>
+			<Option target="code"/>
 		</Unit>
 		<Unit filename="D:/Riscv5/register.hpp">
-			<Option target="Riscv5"/>
+			<Option target="code"/>
 		</Unit>
 		<Unit filename="D:/Riscv5/utility.hpp">
-			<Option target="Riscv5"/>
+			<Option target="code"/>
 		</Unit>
 		<Unit filename="D:/Riscv5/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
