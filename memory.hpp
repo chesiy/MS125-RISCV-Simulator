@@ -21,8 +21,9 @@ public:
         char tmp[20];
         memset(tmp,0,sizeof(tmp));
         int cursor=0;
-        while(cin>>tmp) {
-         //   if(tmp[0]=='#')break;
+        while(true) {
+            cin>>tmp;
+            if(tmp[0]=='#')break;
             if (tmp[0] == '@')cursor = string_to_int(tmp + 1);
             else {
                 mem[cursor] = static_cast<unsigned char>(string_to_int(tmp));
@@ -32,7 +33,7 @@ public:
         }
     }
 
-    unsigned char getmem(unsigned int p)const{
+    inline unsigned char getmem(unsigned int p)const{
         return mem[p];
     }
     void changemem(int p,unsigned char ch){
@@ -40,11 +41,11 @@ public:
         if(p==0x30004)is_end=true;
     }
 
-    void printmem(){
+ /*   void printmem(){
         for(int i=0;i<=2000000;i++){
-            if(mem[i]!=0)printf("%d%d\n",i,(unsigned int)mem[i]);
+            if(mem[i]!=0)printf("%d%d\t",i,(unsigned int)mem[i]);
         }
-    }
+    }*/
 };
 
 class regist{
@@ -53,14 +54,21 @@ private:
     unsigned int regi[32];
     memory *m;
 public:
+
+    int unpc;//whether pc is available
+    int unreg[32];//whether available
+
     regist(unsigned int p,memory *memo){
-        for(int i=0;i<32;i++)regi[i]=0;
+        for(int i=0;i<32;i++){
+            regi[i]=0;unreg[i]=0;
+        }
+        unpc=0;
         pc=p;
         m=memo;
     }
-    unsigned int getpc(){return pc;}
+    inline unsigned int getpc(){return pc;}
 
-    void changepc(unsigned int x){pc=x;}
+    inline void changepc(unsigned int x){pc=x;}
 
     void changereg(int pos,unsigned int x){
         if(pos==0)return;//0号寄存器永远是0
@@ -75,7 +83,7 @@ public:
         for(int i=0;i<n;i++){
             tmp[i]= static_cast<unsigned int>(m->getmem(pos+i));
         }
-        for(int i=n-1;~i;i--)res=(res<<8)+tmp[i];
+        for(int i=n-1;i>=0;i--)res=(res<<8)+tmp[i];
         return res;
     }
     void store(unsigned int pos,unsigned int x,int n){//把寄存器里的x存入内存中位置pos之后的n位
@@ -104,5 +112,6 @@ public:
         }
         cout << '\n';
     }
+
 };
 #endif //RISCV5_MEMORY_HPP

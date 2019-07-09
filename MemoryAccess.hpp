@@ -5,8 +5,6 @@
 #ifndef RISCV5_MEMORYACCESS_HPP
 #define RISCV5_MEMORYACCESS_HPP
 
-//#include "register.hpp"
-//#include "instruction.hpp"
 #include "utility.hpp"
 #include "WriteBack.hpp"
 #include <iostream>
@@ -19,6 +17,7 @@ public:
     MA(regist *r):reg(r){}
 
     void perform(){
+        if(instruction.type==LOCK)return;
         switch(instruction.type){
             case LB:
                 instruction.res=signedExtend(reg->load(instruction.src1,1),7);

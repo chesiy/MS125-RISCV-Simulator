@@ -5,7 +5,6 @@
 #ifndef RISCV5_WRITEBACK_HPP
 #define RISCV5_WRITEBACK_HPP
 
-//#include "register.hpp"
 #include "instruction.hpp"
 #include "utility.hpp"
 #include <iostream>
@@ -18,6 +17,7 @@ public:
     WB(regist*r):reg(r){}
 
     void perform(){
+        if(instruction.type==LOCK)return;
         switch (instruction.type){
             case LUI:
                 reg->changereg(instruction.rd,instruction.imm);
@@ -58,6 +58,62 @@ public:
             case ADD:case SUB:case SLL:case SLT:case SLTU:
             case XOR:case SRL:case SRA:case OR:case AND:
                 reg->changereg(instruction.rd,instruction.res);
+                break;
+            default:break;
+        }
+        removelock();
+    }
+    void removelock(){
+        switch (instruction.type){
+            case LUI:
+                reg->unreg[instruction.rd]--;
+                break;
+            case AUIPC:
+                reg->unreg[instruction.rd]--;
+                break;
+            case JAL:
+                reg->unreg[instruction.rd]--;
+                reg->unpc--;
+                break;
+            case JALR:
+                reg->unreg[instruction.rd]--;
+                reg->unpc--;
+                break;
+            case BEQ:
+            case BNE:
+            case BLT:
+            case BGE:
+            case BLTU:
+            case BGEU:
+                reg->unpc--;
+                break;
+            case LB:
+            case LH:
+            case LW:
+            case LBU:
+            case LHU:
+                reg->unreg[instruction.rd]--;
+                break;
+            case ADDI:
+                reg->unreg[instruction.rd]--;
+                break;
+            case SLTI:case SLTIU:
+                reg->unreg[instruction.rd]--;
+                break;
+            case XORI:case ORI:case ANDI:
+                reg->unreg[instruction.rd]--;
+                break;
+            case SLLI:case SRLI:case SRAI:
+                reg->unreg[instruction.rd]--;
+                break;
+            case ADD:case SUB:
+            case SLL:case SLT:
+            case SLTU:case XOR:
+            case SRL:case SRA:
+            case OR:case AND:
+                reg->unreg[instruction.rd]--;
+                break;
+            default:
                 break;
         }
     }

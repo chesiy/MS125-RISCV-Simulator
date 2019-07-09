@@ -21,6 +21,7 @@ public:
 
     EX(regist *reg):r(reg){}
     void perform(){
+        if(instruction.type==EMPTY)return;
         switch (instruction.type){
             case AUIPC:
                 instruction.res=instruction.src1+instruction.imm;
@@ -114,6 +115,7 @@ public:
             case AND:
                 instruction.res=(instruction.src1&instruction.src2);
                 break;
+            default:break;
         }
     }
     void go_on(MA &next){

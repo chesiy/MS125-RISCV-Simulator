@@ -19,32 +19,26 @@ MA meac(&reg);
 WB wbck(&reg);
 
 int main() {
-
     mem.fullmem();
-/*    for(int i=0;i<10000;i++){
-        int tmp= static_cast<int>(mem.getmem(i));
-        printf("%X",tmp);
-        cout<<' ';
-    }
-    cout<<'\n';
-*/
-    while(!mem.is_end){
-    //    cout<<i<<' ';
-        fet.perform();
-        fet.go_on(deco);
-
-        deco.perform();
-        deco.go_on(exe);
-
-        exe.perform();
-        exe.go_on(meac);
-
-        meac.perform();
-        meac.go_on(wbck);
-
+    int i=1;
+    while(true){
+     //   cout<<i<<' ';
         wbck.perform();
-  //      reg.printreg();
-  //      i++;
+        meac.perform();
+        exe.perform();
+        deco.perform();
+        if(!deco.cantdo)fet.perform();
+        if(mem.is_end)break;
+        //cantdo的情况主要是ID的时候pc或者寄存器正在被用
+        meac.go_on(wbck);
+        exe.go_on(meac);
+        deco.go_on(exe);
+        if(!deco.cantdo)fet.go_on(deco);
+     //   mem.printmem();
+      //  reg.printreg();
+     //   fet.instruction.printinst();
+    //    i++;
+   //     cout<<'\n'<<'\n';
     }
     cout<<(unsigned int)((reg.getreg(10)) & 255u)<<endl;
 

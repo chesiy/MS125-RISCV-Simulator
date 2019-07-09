@@ -15,9 +15,8 @@ unsigned int signedExtend(unsigned int data,int bits){//bits是最高位
     return data;
 }
 
-unsigned int setzero(unsigned int x){
-    if(x&1)return x^1;
-    else return x;
+inline unsigned int setzero(unsigned int x){
+   return x&~1;
 }
 
 unsigned int decodeit(char c){

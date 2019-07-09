@@ -64,39 +64,39 @@ CMAKE_SOURCE_DIR = D:\Riscv5
 CMAKE_BINARY_DIR = D:\Riscv5\cmake-build-debug
 
 #=============================================================================
-# Target rules for target CMakeFiles/code.dir
+# Target rules for target CMakeFiles/Riscv5.dir
 
 # All Build rule for target.
-CMakeFiles/code.dir/all:
-	$(MAKE) -f CMakeFiles\code.dir\build.make CMakeFiles/code.dir/depend
-	$(MAKE) -f CMakeFiles\code.dir\build.make CMakeFiles/code.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\Riscv5\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target code"
-.PHONY : CMakeFiles/code.dir/all
+CMakeFiles/Riscv5.dir/all:
+	$(MAKE) -f CMakeFiles\Riscv5.dir\build.make CMakeFiles/Riscv5.dir/depend
+	$(MAKE) -f CMakeFiles\Riscv5.dir\build.make CMakeFiles/Riscv5.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\Riscv5\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target Riscv5"
+.PHONY : CMakeFiles/Riscv5.dir/all
 
 # Include target in all.
-all: CMakeFiles/code.dir/all
+all: CMakeFiles/Riscv5.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/code.dir/rule: cmake_check_build_system
+CMakeFiles/Riscv5.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\Riscv5\cmake-build-debug\CMakeFiles 2
-	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/code.dir/all
+	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/Riscv5.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\Riscv5\cmake-build-debug\CMakeFiles 0
-.PHONY : CMakeFiles/code.dir/rule
+.PHONY : CMakeFiles/Riscv5.dir/rule
 
 # Convenience name for target.
-code: CMakeFiles/code.dir/rule
+Riscv5: CMakeFiles/Riscv5.dir/rule
 
-.PHONY : code
-
-# clean rule for target.
-CMakeFiles/code.dir/clean:
-	$(MAKE) -f CMakeFiles\code.dir\build.make CMakeFiles/code.dir/clean
-.PHONY : CMakeFiles/code.dir/clean
+.PHONY : Riscv5
 
 # clean rule for target.
-clean: CMakeFiles/code.dir/clean
+CMakeFiles/Riscv5.dir/clean:
+	$(MAKE) -f CMakeFiles\Riscv5.dir\build.make CMakeFiles/Riscv5.dir/clean
+.PHONY : CMakeFiles/Riscv5.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/Riscv5.dir/clean
 
 .PHONY : clean
 

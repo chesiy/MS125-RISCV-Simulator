@@ -9,6 +9,5 @@ CMakeFiles/Riscv5.dir/main.cpp.obj: ../excution.hpp
 CMakeFiles/Riscv5.dir/main.cpp.obj: ../instruction.hpp
 CMakeFiles/Riscv5.dir/main.cpp.obj: ../main.cpp
 CMakeFiles/Riscv5.dir/main.cpp.obj: ../memory.hpp
-CMakeFiles/Riscv5.dir/main.cpp.obj: ../register.hpp
 CMakeFiles/Riscv5.dir/main.cpp.obj: ../utility.hpp
 

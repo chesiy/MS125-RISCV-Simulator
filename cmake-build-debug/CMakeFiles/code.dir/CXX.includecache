@@ -9,12 +9,16 @@
 D:/Riscv5/InstructionDecode.hpp
 iostream
 -
+register.hpp
+D:/Riscv5/register.hpp
 instruction.hpp
 D:/Riscv5/instruction.hpp
 
 D:/Riscv5/InstructionFetch.hpp
 iostream
 -
+register.hpp
+D:/Riscv5/register.hpp
 instruction.hpp
 D:/Riscv5/instruction.hpp
 
@@ -83,6 +87,8 @@ utility.hpp
 D:/Riscv5/utility.hpp
 cstring
 -
+
+D:/Riscv5/register.hpp
 
 D:/Riscv5/utility.hpp
 iostream

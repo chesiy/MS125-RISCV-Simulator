@@ -10,12 +10,15 @@
 #include <stdio.h>
 ///选好这条指令的type，然后把该赋的值给rs，rd，imm
 enum InsType{
-    LUI, AUIPC, JAL, JALR,                          //0-3
-    BEQ, BNE, BLT, BGE, BLTU,BGEU,                   //4-9
-    LB, LH, LW, LBU, LHU,                           //10-14
-    SB, SH, SW,                                      //15-17
-    ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI,     //18-26
-    ADD, SUB, SLL, SLT, SLTU, XOR, SRL, SRA, OR, AND          //27-36
+    EMPTY,//用于第一轮空跑                            //0
+    LUI, AUIPC, JAL, JALR,                          //1-4
+    BEQ, BNE, BLT, BGE, BLTU,BGEU,                   //5-10
+    LB, LH, LW, LBU, LHU,                           //11-15
+    SB, SH, SW,                                      //16-18
+    ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI,     //19-27
+    ADD, SUB, SLL, SLT, SLTU, XOR, SRL, SRA, OR, AND,          //28-37
+    LOCK//如果decode之后发现寄存器或者pc没法用，就把类型设为lock。
+    // 然后进行下去的时候，碰到lock就返回。
 };
 
 class inst{
@@ -115,6 +118,7 @@ public:
                 }
                 break;
             }
+            default: {type=LOCK;break;}
         }
     }
     void setarg(){
@@ -200,14 +204,13 @@ public:
                 rd = (instr >> 7) & 0b11111;
                 break;
             }
+            default:break;
         }
     }
     void printinst(){
         cout<<"inst=";printf("%X",instr);
         cout<<'\t';
     }
-
-
 };
 
 
