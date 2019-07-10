@@ -9,16 +9,12 @@
 D:/Riscv5/InstructionDecode.hpp
 iostream
 -
-register.hpp
-D:/Riscv5/register.hpp
 instruction.hpp
 D:/Riscv5/instruction.hpp
 
 D:/Riscv5/InstructionFetch.hpp
 iostream
 -
-register.hpp
-D:/Riscv5/register.hpp
 instruction.hpp
 D:/Riscv5/instruction.hpp
 
@@ -47,6 +43,14 @@ iostream
 -
 instruction.hpp
 D:/Riscv5/instruction.hpp
+MemoryAccess.hpp
+D:/Riscv5/MemoryAccess.hpp
+
+D:/Riscv5/forwarding.hpp
+InstructionDecode.hpp
+D:/Riscv5/InstructionDecode.hpp
+excution.hpp
+D:/Riscv5/excution.hpp
 MemoryAccess.hpp
 D:/Riscv5/MemoryAccess.hpp
 
@@ -77,6 +81,8 @@ MemoryAccess.hpp
 D:/Riscv5/MemoryAccess.hpp
 WriteBack.hpp
 D:/Riscv5/WriteBack.hpp
+forwarding.hpp
+D:/Riscv5/forwarding.hpp
 stdio.h
 -
 string.h
@@ -87,8 +93,6 @@ utility.hpp
 D:/Riscv5/utility.hpp
 cstring
 -
-
-D:/Riscv5/register.hpp
 
 D:/Riscv5/utility.hpp
 iostream
