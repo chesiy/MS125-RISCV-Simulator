@@ -27,11 +27,20 @@ class inst{
     friend class EX;
     friend class MA;
     friend class WB;
+    friend class Forwarding;
 private:
     InsType type;
     unsigned int instr;//指令
     unsigned int imm,rd,rs1,rs2;
     unsigned int src1,src2,res;
+
+ /*   struct forward{
+        bool wreg;//指令是否要写目的寄存器
+        int  wdes;//指令要写的目的寄存器地址
+        int wdata;//指令要写入目的寄存器的数据
+    };
+    forward EXf,MAf;//execution阶段和memory access阶段*/
+
 public:
     inst(){
         instr=imm=rd=rs1=rs2=0;

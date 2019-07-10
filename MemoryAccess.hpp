@@ -17,7 +17,7 @@ public:
     MA(regist *r):reg(r){}
 
     void perform(){
-        if(instruction.type==LOCK)return;
+        if(instruction.type==LOCK|instruction.type==EMPTY)return;
         switch(instruction.type){
             case LB:
                 instruction.res=signedExtend(reg->load(instruction.src1,1),7);

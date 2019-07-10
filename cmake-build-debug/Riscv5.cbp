@@ -97,6 +97,9 @@
 		<Unit filename="D:/Riscv5/excution.hpp">
 			<Option target="Riscv5"/>
 		</Unit>
+		<Unit filename="D:/Riscv5/forwarding.hpp">
+			<Option target="Riscv5"/>
+		</Unit>
 		<Unit filename="D:/Riscv5/instruction.hpp">
 			<Option target="Riscv5"/>
 		</Unit>

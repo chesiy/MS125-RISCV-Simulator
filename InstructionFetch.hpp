@@ -29,7 +29,7 @@ public:
     }
     void go_on(ID &next){
         next.instruction=instruction;
-        if(cantdo){next.instruction.type=LOCK;}//这里要怎么办啊。。。。。。
+        if(cantdo){next.instruction.type=LOCK;}
     }
 };
 

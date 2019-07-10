@@ -9,9 +9,9 @@
 #include <cstring>
 
 class memory {
-//#define MAXN 0x3fffff
+#define MAXN 0x3fffff
 private:
-    unsigned char mem[0x3fffff];//别忘了改
+    unsigned char mem[MAXN];//别忘了改
 public:
     bool is_end=false;
     memory(){
@@ -21,9 +21,8 @@ public:
         char tmp[20];
         memset(tmp,0,sizeof(tmp));
         int cursor=0;
-        while(true) {
-            cin>>tmp;
-            if(tmp[0]=='#')break;
+        while(cin>>tmp) {
+         //   if(tmp[0]=='#')break;
             if (tmp[0] == '@')cursor = string_to_int(tmp + 1);
             else {
                 mem[cursor] = static_cast<unsigned char>(string_to_int(tmp));
@@ -38,14 +37,9 @@ public:
     }
     void changemem(int p,unsigned char ch){
         mem[p]=ch;
-        if(p==0x30004)is_end=true;
+        if(p==0x30004)is_end=true;//当最后访问到0x30004的时候程序结束，并且最后写了0x30004
     }
 
- /*   void printmem(){
-        for(int i=0;i<=2000000;i++){
-            if(mem[i]!=0)printf("%d%d\t",i,(unsigned int)mem[i]);
-        }
-    }*/
 };
 
 class regist{

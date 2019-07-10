@@ -21,18 +21,25 @@ public:
 
     EX(regist *reg):r(reg){}
     void perform(){
-        if(instruction.type==EMPTY)return;
+        if(instruction.type==EMPTY|instruction.type==LOCK)return;
         switch (instruction.type){
+            case LUI:
+                instruction.res=instruction.imm;
+                break;
             case AUIPC:
                 instruction.res=instruction.src1+instruction.imm;
                 break;
-            case JAL:
-                instruction.res=instruction.src1+instruction.imm;
+                //JAL~BGEU的pc是要变的，这里的res并不完全是要写入寄存器的值
+                //所以在forwarding的时候，应该要特殊处理
+            case JAL://此result是个pc
+         //       instruction.res=instruction.src1+instruction.imm;
+         //       break;
+            case JALR://此result是个pc
+         //       instruction.res=instruction.src1+instruction.imm;
+         //       instruction.res=setzero(instruction.res);//最低位置零
                 break;
-            case JALR:
-                instruction.res=instruction.src1+instruction.imm;
-                instruction.res=setzero(instruction.res);//最低位置零
-                break;
+                //B-type的result pc并没有在execution阶段被算出来，
+                // 这里的result甚至并不用被写入寄存器
             case BEQ:
                 instruction.res= static_cast<unsigned int>(instruction.src1==instruction.src2);
                 break;
