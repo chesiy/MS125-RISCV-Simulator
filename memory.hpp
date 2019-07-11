@@ -21,9 +21,9 @@ public:
         char tmp[20];
         memset(tmp,0,sizeof(tmp));
         int cursor=0;
-        while(true) {
-            cin>>tmp;
-            if(tmp[0]=='#')break;
+        while(cin>>tmp) {
+         //   cin>>tmp;
+       //     if(tmp[0]=='#')break;
             if (tmp[0] == '@')cursor = string_to_int(tmp + 1);
             else {
                 mem[cursor] = static_cast<unsigned char>(string_to_int(tmp));

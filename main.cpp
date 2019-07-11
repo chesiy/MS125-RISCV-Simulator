@@ -22,16 +22,16 @@ Forwarding forw;
 
 int main() {
     mem.fullmem();
-//    int i=1;
+ //   int i=1;
     while(true){
- //       cout<<i<<' ';
+  //      cout<<i<<' ';
         wbck.perform();
         meac.perform();
         forw.MA_forward_EX(meac,exe);
         exe.perform();
         deco.perform();
         if(!deco.cantdo)forw.MA_forward_ID(meac,deco);
-        if(!deco.cantdo)forw.EX_forward_ID(exe,deco);
+  //      if(!deco.cantdo)forw.EX_forward_ID(exe,deco);
         if(!deco.cantdo)fet.perform();
         if(mem.is_end)break;
         //cantdo的情况主要是ID的时候pc正在被用
@@ -39,11 +39,11 @@ int main() {
         exe.go_on(meac);
         deco.go_on(exe);
         if(!deco.cantdo)fet.go_on(deco);
-  //      i++;
+ //       i++;
+ //       fet.instruction.printinst();
  //       reg.printreg();
-//        fet.instruction.printinst();
     }
-    cout<<(unsigned int)((reg.getreg(10)) & 255u)<<endl;
+    cout<<(unsigned int)((reg.getreg(10)) & 255u)<<endl;//只取最低八位
 
     return 0;
 }
