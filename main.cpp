@@ -31,7 +31,6 @@ int main() {
         exe.perform();
         deco.perform();
         if(!deco.cantdo)forw.MA_forward_ID(meac,deco);
-  //      if(!deco.cantdo)forw.EX_forward_ID(exe,deco);
         if(!deco.cantdo)fet.perform();
         if(mem.is_end)break;
         //cantdo的情况主要是ID的时候pc正在被用

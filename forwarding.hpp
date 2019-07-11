@@ -67,34 +67,6 @@ public:
             default:break;
         }
     }
-    void EX_forward_ID(EX &ex,ID &id){
-        switch (ex.instruction.type){
-            case LUI:
-            case AUIPC:
-            case LB:case LH:case LW:
-            case LBU:case LHU:
-            case SB:
-            case SH:
-            case SW:
-            case ADDI:case SLTI:
-            case SLTIU:case XORI:
-            case ORI:case ANDI:
-            case SLLI:
-            case SRLI:
-            case SRAI:
-            case ADD:case SUB:case SLL:case SLT:case SLTU:
-            case XOR:case SRL:case SRA:case OR:case AND:
-                if(id.instruction.rs1==ex.instruction.rd&&ex.instruction.rd!=0){
-                    //后面指令的execution阶段要用寄存器里还没被写入的数据（是个二传）
-                    id.instruction.src1=ex.instruction.res;
-                }
-                if(id.instruction.rs2==ex.instruction.rd&&ex.instruction.rd!=0){
-                    id.instruction.src2=ex.instruction.res;
-                }
-                break;
-            default:break;
-        }
-    }
 
 };
 #endif //RISCV5_FORWARDING_HPP
