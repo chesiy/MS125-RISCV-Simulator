@@ -15,8 +15,8 @@ private:
     regist *reg;//其实只用了pc寄存器
 public:
     bool cantdo;
-
     inst instruction;
+
     IF(regist *r):reg(r),cantdo(0){}
 
     void perform(){

@@ -7,18 +7,19 @@
 
 #include <iostream>
 #include "instruction.hpp"
+#include "prediction.hpp"
 
 ///根据IF里读到的指令类型，从作为右值的寄存器里读值（rs），
 /// 解析立即数的值，然后赋给（src）；
 class ID{
 private:
     regist *reg;
-
+    predict *pre;
 public:
     inst instruction;
     bool cantdo;
 
-    ID(regist *r):reg(r),cantdo(0){}
+    ID(regist *r,predict *p):reg(r),cantdo(0),pre(p){}
     bool setsrc(){
         switch (instruction.type){
             case AUIPC:
@@ -75,16 +76,10 @@ public:
         return true;
     }
 
-    void lockit(){//保护pc
+    void lockit(){//保护pc,现在只有JAL和JALR需要保护了
         switch (instruction.type) {
             case JAL:
             case JALR:
-            case BEQ:
-            case BNE:
-            case BLT:
-            case BGE:
-            case BLTU:
-            case BGEU:
                 reg->unpc++;
                 break;
             default:
@@ -92,50 +87,21 @@ public:
         }
     }
 
- /*   bool check(){
-        switch(instruction.type){
-            case AUIPC:
-                if(reg->unpc)return false;
-                break;
-            case JAL:
-                if(reg->unpc)return false;
-                break;
-            case JALR://???remain
-                if((reg->unpc)|(instruction.rs1&&reg->unreg[instruction.rs1]))return false;
-                break;
-            case BEQ:case BNE:case BLT:
-            case BGE:case BLTU:case BGEU:
-                if((reg->unpc)|
-                (instruction.rs1&&reg->unreg[instruction.rs1])|
-                (instruction.rs2&&reg->unreg[instruction.rs2]))return false;
-                break;
-            case LB:case LH:case LW:
-            case LBU:case LHU:
-                if(instruction.rs1&&reg->unreg[instruction.rs1])return false;
-                break;
-            case SB:
-            case SH:
-            case SW:
-                if((instruction.rs1&&reg->unreg[instruction.rs1])|
-                (instruction.rs2&&reg->unreg[instruction.rs2]))return false;
-                break;
-            case ADDI:
-            case SLTI:case SLTIU:
-            case XORI:
-            case ORI:case ANDI:
-            case SLLI:case SRLI:case SRAI:
-                if(instruction.rs1&&reg->unreg[instruction.rs1])return false;
-                break;
-            case ADD:case SUB:case SLL:case SLT:case SLTU:
-            case XOR:case SRL:case SRA:case OR:case AND:
-                if((instruction.rs1&&reg->unreg[instruction.rs1])|
-                (instruction.rs2&&reg->unreg[instruction.rs2]))return false;
-                break;
-            default:break;
+    void prediction(){
+        if(instruction.type==BEQ||instruction.type==BGE||instruction.type==BGEU||instruction.type==BLT||
+        instruction.type==BLTU||instruction.type==BNE){
+            instruction.preresult=pre->predictit(instruction.type);
+            if(instruction.preresult){//预测出来需要跳
+                reg->changepc(instruction.rd-4+instruction.imm);
+            }
         }
-        return true;
     }
-   */
+
+    void reget(){
+        instruction.initial();
+        instruction.instr=reg->getinst();
+    }
+
     void perform(){
         cantdo=false;
         if(instruction.type==LOCK)return;
@@ -144,7 +110,10 @@ public:
         if(!setsrc()){
             cantdo=true;
         }//需要等待了
-        else lockit();
+        else {
+            prediction();
+            lockit();
+        }
     }
     void go_on(EX &next){
         next.instruction=instruction;

@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(code main.cpp utility.hpp memory.hpp
         instruction.hpp InstructionFetch.hpp InstructionDecode.hpp
-        excution.hpp MemoryAccess.hpp WriteBack.hpp forwarding.hpp)
+        excution.hpp MemoryAccess.hpp WriteBack.hpp forwarding.hpp prediction.hpp)

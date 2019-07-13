@@ -28,20 +28,21 @@ class inst{
     friend class MA;
     friend class WB;
     friend class Forwarding;
+    friend class predict;
 private:
-    InsType type;
     unsigned int instr;//指令
     unsigned int imm,rd,rs1,rs2;
     unsigned int src1,src2,res;
-
+    unsigned int preresult;
 public:
+    InsType type;
     inst(){
         instr=imm=rd=rs1=rs2=0;
-        src1=src2=res=0;
+        src1=src2=res=preresult=0;
     }
     void initial(){
         instr=imm=rd=rs1=rs2=0;
-        src1=src2=res=0;
+        src1=src2=res=preresult=0;
     }
     void chooseType(){
         unsigned int opcode;
@@ -211,7 +212,7 @@ public:
     }
     void printinst(){
         cout<<"inst=";printf("%X",instr);
-        cout<<'\t';
+        cout<<'\n';
     }
 };
 

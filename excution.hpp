@@ -10,16 +10,18 @@
 #include <iostream>
 #include "instruction.hpp"
 #include "MemoryAccess.hpp"
+#include "prediction.hpp"
 
 using namespace std;
 
 class EX{
 private:
     regist *r;
+    predict *pred;
 public:
     inst instruction;
 
-    EX(regist *reg):r(reg){}
+    EX(regist *reg,predict *pr):r(reg),pred(pr){}
     void perform(){
         if(instruction.type==EMPTY|instruction.type==LOCK)return;
         switch (instruction.type){
@@ -31,13 +33,13 @@ public:
                 break;
                 //JAL~BGEU的pc是要变的，这里的res并不完全是要写入寄存器的值
                 //所以在forwarding的时候，应该要特殊处理
-            case JAL://此result是个pc
+       //     case JAL://此result是个pc
          //       instruction.res=instruction.src1+instruction.imm;
          //       break;
-            case JALR://此result是个pc
+       //     case JALR://此result是个pc
          //       instruction.res=instruction.src1+instruction.imm;
          //       instruction.res=setzero(instruction.res);//最低位置零
-                break;
+         //       break;
                 //B-type的result pc并没有在execution阶段被算出来，
                 // 这里的result甚至并不用被写入寄存器
             case BEQ:
@@ -125,8 +127,30 @@ public:
             default:break;
         }
     }
+
     void go_on(MA &next){
         next.instruction=instruction;
+    }
+
+    bool confirm(){//看分支预测的对不对
+        if(instruction.type==BEQ||instruction.type==BNE||instruction.type==BLT||
+        instruction.type==BGE||instruction.type==BLTU||instruction.type==BGEU){
+            if(instruction.preresult!=instruction.res){//预测错了
+                pred->record_history(instruction.type,instruction.res,false);
+                if(instruction.preresult==false){
+                    r->changepc(instruction.rd-4+instruction.imm);//应该要跳的,结果没跳
+                }
+                else{//应该不用跳的，结果跳了
+                    r->changepc(instruction.rd);
+                }
+                return false;
+            }
+            else{
+                pred->record_history(instruction.type,instruction.res,true);
+                return true;
+            }
+        }
+        return true;
     }
 };
 #endif //RISCV5_EXCUTION_HPP

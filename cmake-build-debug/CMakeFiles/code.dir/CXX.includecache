@@ -11,6 +11,8 @@ iostream
 -
 instruction.hpp
 D:/Riscv5/instruction.hpp
+prediction.hpp
+D:/Riscv5/prediction.hpp
 
 D:/Riscv5/InstructionFetch.hpp
 iostream
@@ -45,6 +47,8 @@ instruction.hpp
 D:/Riscv5/instruction.hpp
 MemoryAccess.hpp
 D:/Riscv5/MemoryAccess.hpp
+prediction.hpp
+D:/Riscv5/prediction.hpp
 
 D:/Riscv5/forwarding.hpp
 InstructionDecode.hpp
@@ -92,6 +96,12 @@ D:/Riscv5/memory.hpp
 utility.hpp
 D:/Riscv5/utility.hpp
 cstring
+-
+
+D:/Riscv5/prediction.hpp
+cstring
+-
+vector
 -
 
 D:/Riscv5/utility.hpp

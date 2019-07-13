@@ -38,10 +38,10 @@ public:
                 reg->changepc(resultpc);
                 break;
             }
-            case BEQ:case BNE:case BLT:
+          /*  case BEQ:case BNE:case BLT:
             case BGE:case BLTU:case BGEU:
                 if(instruction.res)reg->changepc(instruction.rd-4+instruction.imm);
-                break;
+                break;*/
             case LB:case LH:case LW:
             case LBU:case LHU:
                 reg->changereg(instruction.rd,instruction.res);
@@ -72,12 +72,6 @@ public:
         switch (instruction.type){
             case JAL:
             case JALR:
-            case BEQ:
-            case BNE:
-            case BLT:
-            case BGE:
-            case BLTU:
-            case BGEU:
                 reg->unpc--;
                 break;
             default:
