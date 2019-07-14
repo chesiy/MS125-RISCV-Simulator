@@ -17,7 +17,7 @@ public:
     WB(regist*r):reg(r){}
 
     void perform(){
-        if(instruction.type==LOCK)return;
+        if(instruction.type==LOCK||instruction.type==EMPTY)return;
         switch (instruction.type){
             case LUI:
                 reg->changereg(instruction.rd,instruction.res);
@@ -38,10 +38,6 @@ public:
                 reg->changepc(resultpc);
                 break;
             }
-          /*  case BEQ:case BNE:case BLT:
-            case BGE:case BLTU:case BGEU:
-                if(instruction.res)reg->changepc(instruction.rd-4+instruction.imm);
-                break;*/
             case LB:case LH:case LW:
             case LBU:case LHU:
                 reg->changereg(instruction.rd,instruction.res);
@@ -69,14 +65,8 @@ public:
         removelock();
     }
     void removelock(){
-        switch (instruction.type){
-            case JAL:
-            case JALR:
-                reg->unpc--;
-                break;
-            default:
-                break;
-        }
+        if(instruction.type==JAL||instruction.type==JALR)
+            reg->unpc--;
     }
 };
 

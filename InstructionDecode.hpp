@@ -77,14 +77,7 @@ public:
     }
 
     void lockit(){//保护pc,现在只有JAL和JALR需要保护了
-        switch (instruction.type) {
-            case JAL:
-            case JALR:
-                reg->unpc++;
-                break;
-            default:
-                break;
-        }
+        if(instruction.type==JAL||instruction.type==JALR)reg->unpc++;
     }
 
     void prediction(){
@@ -96,12 +89,9 @@ public:
             }
         }
     }
-
     void reget(){
-        instruction.initial();
         instruction.instr=reg->getinst();
     }
-
     void perform(){
         cantdo=false;
         if(instruction.type==LOCK)return;

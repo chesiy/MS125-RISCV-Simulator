@@ -23,7 +23,6 @@ public:
         if(reg->unpc)cantdo=true;
         else{
             cantdo=false;
-            instruction.initial();
             instruction.instr=reg->getinst();
         }
     }

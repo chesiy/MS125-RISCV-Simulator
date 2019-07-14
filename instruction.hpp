@@ -40,10 +40,6 @@ public:
         instr=imm=rd=rs1=rs2=0;
         src1=src2=res=preresult=0;
     }
-    void initial(){
-        instr=imm=rd=rs1=rs2=0;
-        src1=src2=res=preresult=0;
-    }
     void chooseType(){
         unsigned int opcode;
         unsigned int func3,func7;

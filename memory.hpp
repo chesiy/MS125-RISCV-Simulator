@@ -40,7 +40,6 @@ public:
         mem[p]=ch;
         if(p==0x30004)is_end=true;//当最后访问到0x30004的时候程序结束，并且最后写了0x30004
     }
-
 };
 
 class regist{
@@ -49,7 +48,6 @@ private:
     unsigned int regi[32];
     memory *m;
 public:
-
     int unpc;//whether pc is available
     int unreg[32];//whether available
 
