@@ -8,12 +8,12 @@
 ## Knowledge Points
 **RISC-V32I指令集**：汇编语言的一种，每条指令语句都是简单的，仅涉及三个元素的操作。
 
-**寄存器**：计算机中最快速也最稀缺的存储资源；本次设计的模拟器采用32个32位寄存器，和PC寄存器记录当前程序运行到的位置。
+**寄存器**：本次设计的模拟器采用32个*32位寄存器*和*PC寄存器*（用于记录当前程序运行到的位置）。
 
 **指令**：长度为32位的01串，二进制表示，分为以下几类：  
-  &emsp;1.寄存器间的简单运算&emsp;  
-  &emsp;2.内存操作，如读取和写入&emsp;  
-  &emsp;3.流程控制操作，即跳转&emsp;  
+  &emsp;1.寄存器间的简单运算（运算类指令）&emsp;  
+  &emsp;2.内存操作，如读取和写入（内存操作）&emsp;  
+  &emsp;3.流程控制操作，即跳转（分支）&emsp;  
   
 **指令的执行**  
 1.获取指令，从内存中PC寄存器指向的地址中读取指令内容  
@@ -23,7 +23,7 @@
 5.将结果写回左值  
 6.移动PC寄存器向下一指令  
 
-**基础结构**：需要一个封装好的内存类，和一个封装好的寄存器类。
+**基础结构**：需要一个模拟内存类，和一个模拟寄存器类。
 
 **硬件分析**：硬件模块是一种由输入信号决定输出信号的设施，每一个硬件模块的任务是唯一确定的。对于RISC-V模拟器，我们可以将整体根据指令执行的流程来划分硬件块，使不同的块分别处理不同的任务。假设完成一条指令需要三个硬件块，那么最后一个模块完成后就会通知第一个模块——该指令完成，可以开始下一条指令。但是，三个模块同一时间只有一个在工作，另外两个被闲置，为了提高效率，采用**流水设计**，处理前一条指令的同时处理下几条指令。
 
@@ -34,12 +34,15 @@
  **Memory Access**：根据计算出的地址从内存中读取数据值，或写入已准备好的数据值。（MA）  
  **Write Back**：完成对左值寄存器的赋值。（WB）  
  
- **Hazard**  
- **Data Hazard**：一个寄存器在一条赋值指令后紧接着又被调用（寄存器里的值就不是原来的那个了）  
+ ### Hazard  
+ **Data Hazard**：一个寄存器在一条赋值指令后紧接着又被调用（寄存器里的值就不是原来的那个了）
+ 
  **Control Hazard**：由跳转指令引起的提前读入错误指令（本来下一条指令应该是跳转后指令的后一条，但读入的却是跳转指令顺序的后一条）  
- 最简单的处理方法是等待闲置，即给可能出现Hazard的指令上锁。也可以用Forwarding和Branch Prediction。  
+ 最简单的处理方法是等待闲置，即给可能出现Hazard的指令上锁。也可以用Forwarding和Branch Prediction。
+ 
  **Forwarding**：在EX和MA过程中得到的应被赋给寄存器的值直接通知EX或ID（给下面几条指令用）。  
  【但Forwarding仍不能解决*内存load指令后紧随的依赖该寄存器的指令*这种情况，故只能等待闲置】  
+ 
  **Branch Prediction**：对跳转指令分类讨论：  
  &emsp;1.JAL直接跳至立即数位置，可直接被发现并做好处理。&emsp;   
  &emsp;2.JALR跳转位置依赖寄存器的值难以提前处理。&emsp;  
@@ -53,34 +56,34 @@
   加入forwarding处理data hazard的时候，MA给EX和ID分别传了数据。  
   分支预测采用的是根据最近5个的历史决定要不要跳，成功率如下：
 
-Bulgarian
-Success num= 56853 total num= 71493
+Bulgarian  
+Success num= 56853 total num= 71493  
  rate= 0.795225
 
-magic
-success num= 35949 total num= 67869
+magic  
+success num= 35949 total num= 67869  
  rate= 0.529682
 
-Hanoi
-Success num= 12840 total num= 17457
+Hanoi  
+Success num= 12840 total num= 17457  
  rate= 0.735522
 
-Qsort
-Success num= 165302 total num= 200045
+Qsort  
+Success num= 165302 total num= 200045  
  rate= 0.826324
 
-queen
-success num= 51732 total num= 77116
+queen  
+success num= 51732 total num= 77116  
  rate= 0.670834
 
-super loop
-success num= 371666 total num= 435027
+super loop  
+success num= 371666 total num= 435027  
  rate= 0.854352
 
-tak
-success num= 42479 total num= 60639
+tak  
+success num= 42479 total num= 60639  
  rate= 0.700523
 
-Pi
- Success num= 32350534 total num= 39956380
+Pi  
+ Success num= 32350534 total num= 39956380  
  rate= 0.809646
