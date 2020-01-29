@@ -38,7 +38,7 @@
  **Data Hazard**：一个寄存器在一条赋值指令后紧接着又被调用（寄存器里的值就不是原来的那个了）  
  **Control Hazard**：由跳转指令引起的提前读入错误指令（本来下一条指令应该是跳转后指令的后一条，但读入的却是跳转指令顺序的后一条）  
  最简单的处理方法是等待闲置，即给可能出现Hazard的指令上锁。也可以用Forwarding和Branch Prediction。  
- **Forwarding**：在EX和MA过程中得到的应被赋给寄存器（WB）的值直接通知EX，EX在诸多数据来源中进行选择。  
+ **Forwarding**：在EX和MA过程中得到的应被赋给寄存器的值直接通知EX或ID（给下面几条指令用）。  
  【但Forwarding仍不能解决*内存load指令后紧随的依赖该寄存器的指令*这种情况，故只能等待闲置】  
  **Branch Prediction**：对跳转指令分类讨论：  
  &emsp;1.JAL直接跳至立即数位置，可直接被发现并做好处理。&emsp;   
